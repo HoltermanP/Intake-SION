@@ -11,7 +11,10 @@
     "build:server": "cd server && npm run build",
     "start": "cd server && npm start",
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
-    "postinstall": "npm run install-all"
+    "postinstall": "npm run install-all",
+    "deploy:frontend": "cd client && vercel --prod",
+    "deploy:backend": "cd server && vercel --prod",
+    "deploy:all": "./deploy.sh"
   },
   "keywords": ["intakeformulier", "sharepoint", "react", "nodejs"],
   "author": "Patrick Holterman",
