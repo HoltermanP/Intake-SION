@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { API_ENDPOINTS } from '../config/api';
 import {
   Box,
   Typography,
@@ -30,6 +29,12 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { ProjectData } from '../types';
+
+// API configuration
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_ENDPOINTS = {
+  PROJECTS: `${API_BASE_URL}/api/forms/projects`,
+};
 
 const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<ProjectData[]>([]);

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { API_ENDPOINTS } from '../config/api';
 import {
   Box,
   Typography,
@@ -25,6 +24,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { ProjectData } from '../types';
+
+// API configuration
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_ENDPOINTS = {
+  PROJECTS: `${API_BASE_URL}/api/forms/projects`,
+  PROJECT: (projectNumber: string) => `${API_BASE_URL}/api/forms/projects/${projectNumber}`,
+};
 
 const steps = [
   'Projectgegevens',
