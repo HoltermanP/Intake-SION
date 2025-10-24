@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_ENDPOINTS } from '../config/api';
 import {
   Box,
   Typography,
@@ -44,7 +45,7 @@ const ProjectList: React.FC = () => {
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/forms/projects');
+      const response = await fetch(API_ENDPOINTS.PROJECTS);
       const result = await response.json();
       
       if (result.success) {

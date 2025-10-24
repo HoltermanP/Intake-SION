@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_ENDPOINTS } from '../config/api';
 import {
   Box,
   Typography,
@@ -132,7 +133,7 @@ const ProjectForm: React.FC = () => {
     setSubmitError(null);
 
     try {
-      const response = await fetch('/api/forms/projects', {
+      const response = await fetch(API_ENDPOINTS.PROJECTS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
