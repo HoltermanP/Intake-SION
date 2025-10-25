@@ -2,15 +2,17 @@
 
 ## Frontend Deployment (React App)
 
-### Stap 1: Vercel Project Maken
+### Stap 1: Vercel Project Maken voor Frontend
 1. Ga naar [vercel.com](https://vercel.com)
 2. Klik op "New Project"
 3. Import je GitHub repository: `intakeformulier-app`
-4. Configureer:
+4. **BELANGRIJK**: Configureer de volgende instellingen:
    - **Framework Preset**: Create React App
-   - **Root Directory**: `client`
+   - **Root Directory**: `client` ⚠️ **Dit is cruciaal!**
    - **Build Command**: `npm run build`
    - **Output Directory**: `build`
+   - **Install Command**: `npm install`
+   - **Node.js Version**: 18.x (of hoger)
 
 ### Stap 2: Environment Variables
 In Vercel Dashboard > Settings > Environment Variables:
@@ -25,13 +27,15 @@ REACT_APP_API_URL=https://your-backend-url.vercel.app
 
 ## Backend Deployment (Node.js API)
 
-### Stap 1: Aparte Vercel Project
+### Stap 1: Aparte Vercel Project voor Backend
 1. Maak een nieuw Vercel project
 2. Selecteer dezelfde GitHub repository
 3. Configureer:
+   - **Framework Preset**: Other
    - **Root Directory**: `server`
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist` (of laat leeg)
+   - **Install Command**: `npm install`
 
 ### Stap 2: Environment Variables
 ```
@@ -77,10 +81,17 @@ Als je alles in één project wilt:
 ## 🐛 Troubleshooting
 
 ### Common Issues:
-1. **CORS Errors**: Configure CORS in backend
-2. **API Not Found**: Check environment variables
-3. **Build Failures**: Check Node.js version
-4. **Environment Variables**: Ensure they're set in Vercel
+1. **"react-scripts: command not found"**: 
+   - ✅ **Oplossing**: Zorg dat Root Directory = `client` in Vercel
+   - ✅ **Oplossing**: Controleer dat Node.js versie 18+ is
+   - ✅ **Oplossing**: Verwijder en herinstalleer dependencies
+2. **CORS Errors**: Configure CORS in backend
+3. **API Not Found**: Check environment variables
+4. **Build Failures**: Check Node.js version
+5. **Environment Variables**: Ensure they're set in Vercel
+6. **Monorepo Issues**: 
+   - ✅ **Oplossing**: Gebruik aparte Vercel projecten voor frontend/backend
+   - ✅ **Oplossing**: Zet Root Directory correct in elk project
 
 ### Debug Commands:
 ```bash
