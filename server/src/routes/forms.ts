@@ -725,9 +725,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 120,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 5,
-        privateChargingStations: 12,
-        publicChargingStations: 1,
-        notes: "Duurzame energievoorziening"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 132,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 22,
+        comments: "Duurzame energievoorziening"
       },
       {
         kavelNumber: "K13-K20",
@@ -741,9 +743,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 80,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 4,
-        privateChargingStations: 8,
-        publicChargingStations: 1,
-        notes: "Collectieve warmtepomp installatie"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 88,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 22,
+        comments: "Collectieve warmtepomp installatie"
       },
       {
         kavelNumber: "K21-K24",
@@ -757,9 +761,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 150,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 6,
-        privateChargingStations: 4,
-        publicChargingStations: 0,
-        notes: "Individuele warmtepomp per woning"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 44,
+        publicChargingPower: 0,
+        totalPublicChargingPower: 0,
+        comments: "Individuele warmtepomp per woning"
       }
     ],
     totals: {
@@ -785,9 +791,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 100,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 5,
-        privateChargingStations: 18,
-        publicChargingStations: 2,
-        notes: "Renovatie met duurzame verbeteringen"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 198,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 44,
+        comments: "Renovatie met duurzame verbeteringen"
       },
       {
         kavelNumber: "K19-K36",
@@ -801,9 +809,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 75,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 4,
-        privateChargingStations: 18,
-        publicChargingStations: 2,
-        notes: "Collectieve warmtepomp voor appartementen"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 198,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 44,
+        comments: "Collectieve warmtepomp voor appartementen"
       }
     ],
     totals: {
@@ -829,9 +839,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 120,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 5,
-        privateChargingStations: 24,
-        publicChargingStations: 2,
-        notes: "Energieneutrale woningen"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 264,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 44,
+        comments: "Energieneutrale woningen"
       },
       {
         kavelNumber: "K25-K48",
@@ -845,9 +857,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 80,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 4,
-        privateChargingStations: 24,
-        publicChargingStations: 2,
-        notes: "Smart grid integratie"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 264,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 44,
+        comments: "Smart grid integratie"
       },
       {
         kavelNumber: "K49-K56",
@@ -861,8 +875,10 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 150,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 6,
-        privateChargingStations: 8,
-        publicChargingStations: 1,
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 88,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 22,
         notes: "Individuele warmtepomp installaties"
       }
     ],
@@ -889,8 +905,10 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 110,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 5,
-        privateChargingStations: 15,
-        publicChargingStations: 1,
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 165,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 22,
         notes: "Herstructurering met duurzame elementen"
       },
       {
@@ -905,8 +923,10 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 70,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 4,
-        privateChargingStations: 15,
-        publicChargingStations: 1,
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 165,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 22,
         notes: "Collectieve warmtepomp systeem"
       }
     ],
@@ -933,8 +953,10 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 120,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 5,
-        privateChargingStations: 30,
-        publicChargingStations: 3,
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 330,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 66,
         notes: "Smart grid technologie"
       },
       {
@@ -949,8 +971,10 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 80,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 4,
-        privateChargingStations: 30,
-        publicChargingStations: 3,
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 330,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 66,
         notes: "Energieneutrale appartementen"
       },
       {
@@ -965,9 +989,11 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 150,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 6,
-        privateChargingStations: 15,
-        publicChargingStations: 2,
-        notes: "Individuele warmtepomp per woning"
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 165,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 44,
+        comments: "Individuele warmtepomp per woning"
       }
     ],
     totals: {
@@ -993,8 +1019,10 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 115,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 5,
-        privateChargingStations: 21,
-        publicChargingStations: 2,
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 231,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 44,
         notes: "Transformatie van industrieel gebied"
       },
       {
@@ -1009,8 +1037,10 @@ let electricalData: ElectricalCalculationData[] = [
         livingArea: 75,
         heatPumpType: "Lucht-water warmtepomp",
         heatPumpPower: 4,
-        privateChargingStations: 21,
-        publicChargingStations: 2,
+        privateChargingPower: 11,
+        totalPrivateChargingPower: 231,
+        publicChargingPower: 22,
+        totalPublicChargingPower: 44,
         notes: "Sanering en nieuwe infrastructuur"
       }
     ],
