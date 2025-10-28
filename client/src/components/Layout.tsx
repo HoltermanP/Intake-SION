@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import {
   AppBar,
@@ -29,7 +30,7 @@ import {
   AccountCircle as AccountCircleIcon,
   Logout as LogoutIcon
 } from '@mui/icons-material';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useRouter, usePathname } from 'next/navigation';
 import { useMsal } from '@azure/msal-react';
 
 const drawerWidth = 240;
@@ -42,8 +43,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { instance, accounts } = useMsal();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -84,9 +85,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton
-              selected={location.pathname === item.path}
+              selected={pathname === item.path}
               onClick={() => {
-                navigate(item.path);
+                router.push(item.path);
                 if (isMobile) {
                   setMobileOpen(false);
                 }

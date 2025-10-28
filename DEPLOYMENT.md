@@ -1,40 +1,51 @@
-# 🚀 Deployment Guide - Vercel
+# 🚀 Nieuwe Deployment Guide - Vercel
 
-## Frontend Deployment (React App)
+## ✅ Schone Start
 
-### Stap 1: Vercel Project Maken voor Frontend
+Alle oude Vercel configuratie is verwijderd. Nu kunnen we opnieuw beginnen met een werkende setup.
+
+## 📋 Stap-voor-stap Deployment
+
+### Stap 1: Verwijder oude Vercel project
 1. Ga naar [vercel.com](https://vercel.com)
-2. Klik op "New Project"
-3. Import je GitHub repository: `intakeformulier-app`
-4. **BELANGRIJK**: Configureer de volgende instellingen:
-   - **Framework Preset**: Create React App
-   - **Root Directory**: `client` ⚠️ **Dit is cruciaal!**
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `build`
-   - **Install Command**: `npm install`
-   - **Node.js Version**: 18.x (of hoger)
+2. Ga naar je dashboard
+3. Zoek je oude project
+4. Klik op **Settings** → **General** → **Delete Project**
 
-### Stap 2: Environment Variables
+### Stap 2: Maak nieuw Vercel project
+1. Klik op **"New Project"**
+2. Selecteer je GitHub repository: `Intake-SION`
+3. **BELANGRIJK**: Configureer de volgende instellingen:
+
+#### Frontend Project Instellingen:
+- **Framework Preset**: `Other` (Node.js)
+- **Root Directory**: `client` ⚠️ **Dit is cruciaal!**
+- **Build Command**: `npm run build`
+- **Output Directory**: `build`
+- **Install Command**: `npm install`
+- **Node.js Version**: `18.x` (of hoger)
+
+### Stap 3: Environment Variables
 In Vercel Dashboard > Settings > Environment Variables:
 ```
 REACT_APP_API_URL=https://your-backend-url.vercel.app
 ```
 
-### Stap 3: Deploy
-- Klik op "Deploy"
+### Stap 4: Deploy
+- Klik op **"Deploy"**
 - Wacht tot deployment klaar is
 - Je krijgt een URL zoals: `https://intakeformulier-app.vercel.app`
 
-## Backend Deployment (Node.js API)
+## 🔧 Backend Deployment (apart project)
 
-### Stap 1: Aparte Vercel Project voor Backend
+### Stap 1: Maak tweede Vercel project
 1. Maak een nieuw Vercel project
 2. Selecteer dezelfde GitHub repository
 3. Configureer:
-   - **Framework Preset**: Other
+   - **Framework Preset**: `Other`
    - **Root Directory**: `server`
    - **Build Command**: `npm run build`
-   - **Output Directory**: `dist` (of laat leeg)
+   - **Output Directory**: `dist`
    - **Install Command**: `npm install`
 
 ### Stap 2: Environment Variables
@@ -42,11 +53,7 @@ REACT_APP_API_URL=https://your-backend-url.vercel.app
 NODE_ENV=production
 ```
 
-### Stap 3: Deploy Backend
-- Deploy de backend
-- Noteer de URL: `https://your-backend-name.vercel.app`
-
-### Stap 4: Update Frontend
+### Stap 3: Update Frontend
 1. Ga terug naar je frontend project
 2. Update Environment Variable:
    ```
@@ -54,62 +61,33 @@ NODE_ENV=production
    ```
 3. Redeploy de frontend
 
-## 🔧 Alternative: Single Repository Deployment
+## ✅ Waarom dit werkt
 
-Als je alles in één project wilt:
+- **Node.js deployment** - Je app draait nu als een Node.js server
+- **Express server** - Serveert de React build met correcte routing
+- **Geen conflicterende configuratie** - Schone start
+- **Correcte Root Directory** - Vercel weet waar de Node.js app staat
+- **'N' symbool** - Vercel herkent het als een Node.js project
 
-### Option 1: Frontend + Backend Functions
-1. Deploy frontend als hoofdproject
-2. Backend als Vercel Functions in `/api` folder
-3. Move server code naar `client/api/`
+## 🎯 Resultaat
 
-### Option 2: Monorepo Setup
-1. Configure Vercel voor monorepo
-2. Set build commands voor beide apps
-3. Deploy als separate services
-
-## 📝 Post-Deployment Checklist
-
-- [ ] Frontend accessible via Vercel URL
-- [ ] Backend API responding
-- [ ] CORS configured correctly
-- [ ] Environment variables set
-- [ ] Database/SharePoint integration (future)
-- [ ] SSL certificates working
-- [ ] Custom domain (optional)
+Na deze stappen zou je moeten hebben:
+- ✅ Werkende React frontend op Vercel
+- ✅ Werkende Node.js backend op Vercel
+- ✅ Correcte API communicatie tussen frontend en backend
 
 ## 🐛 Troubleshooting
 
-### Common Issues:
-1. **"react-scripts: command not found"**: 
-   - ✅ **Oplossing**: Zorg dat Root Directory = `client` in Vercel
-   - ✅ **Oplossing**: Controleer dat Node.js versie 18+ is
-   - ✅ **Oplossing**: Verwijder en herinstalleer dependencies
-2. **CORS Errors**: Configure CORS in backend
-3. **API Not Found**: Check environment variables
-4. **Build Failures**: Check Node.js version
-5. **Environment Variables**: Ensure they're set in Vercel
-6. **Monorepo Issues**: 
-   - ✅ **Oplossing**: Gebruik aparte Vercel projecten voor frontend/backend
-   - ✅ **Oplossing**: Zet Root Directory correct in elk project
+Als je nog steeds problemen hebt:
+1. **Controleer Root Directory** - Moet `client` zijn voor frontend
+2. **Controleer Node.js versie** - Gebruik 18.x of hoger
+3. **Controleer Environment Variables** - Zorg dat ze correct zijn ingesteld
+4. **Check build logs** - Kijk naar de deployment logs voor specifieke fouten
 
-### Debug Commands:
-```bash
-# Check build locally
-cd client && npm run build
-cd server && npm run build
+## 📝 Volgende stappen
 
-# Test API locally
-curl http://localhost:5001/api/forms/projects
-```
-
-## 🔄 Updates
-
-Na code changes:
-```bash
-git add .
-git commit -m "Update feature"
-git push origin main
-```
-
-Vercel automatically redeploys on push to main branch.
+Na succesvolle deployment:
+1. Test de frontend URL
+2. Test de backend API endpoints
+3. Controleer dat frontend en backend communiceren
+4. Configureer custom domain (optioneel)
