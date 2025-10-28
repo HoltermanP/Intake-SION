@@ -106,6 +106,25 @@ const D2Form: React.FC = () => {
   const fetchProjectData = async () => {
     try {
       setLoading(true);
+      
+      // First try to get existing D2 form data
+      const d2Response = await fetch(`/api/forms/d2/${projectNumber}`);
+      if (d2Response.ok) {
+        const d2Result = await d2Response.json();
+        if (d2Result.success) {
+          setProjectData(d2Result.data);
+          // Pre-fill form with D2 data
+          Object.keys(d2Result.data).forEach(key => {
+            if (d2Result.data[key] !== undefined) {
+              setValue(key, d2Result.data[key]);
+            }
+          });
+          setLoading(false);
+          return;
+        }
+      }
+      
+      // If no D2 form exists, get project data
       const response = await fetch(`/api/forms/projects/${projectNumber}`);
       const result = await response.json();
       
@@ -135,7 +154,7 @@ const D2Form: React.FC = () => {
     setSubmitError(null);
 
     try {
-      const response = await fetch('/api/forms/d2-forms', {
+      const response = await fetch(`/api/forms/d2/${projectNumber}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -146,6 +146,29 @@ const ElectricalForm: React.FC = () => {
 
   const fetchProjectData = async () => {
     try {
+      // First try to get existing electrical calculation data
+      const electricalResponse = await fetch(`/api/forms/electrical/${projectNumber}`);
+      if (electricalResponse.ok) {
+        const electricalResult = await electricalResponse.json();
+        if (electricalResult.success) {
+          setProjectData(electricalResult.data);
+          // Pre-fill form with electrical data
+          if (electricalResult.data.entries) {
+            electricalResult.data.entries.forEach((entry: any, index: number) => {
+              if (index === 0) {
+                // Replace the first entry
+                setValue(`entries.${index}`, entry);
+              } else {
+                // Add additional entries
+                append(entry);
+              }
+            });
+          }
+          return;
+        }
+      }
+      
+      // If no electrical data exists, get project data
       const response = await fetch(`/api/forms/projects/${projectNumber}`);
       const result = await response.json();
       
@@ -221,7 +244,7 @@ const ElectricalForm: React.FC = () => {
         totals
       };
 
-      const response = await fetch('/api/forms/electrical-calculations', {
+      const response = await fetch(`/api/forms/electrical/${projectNumber}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
