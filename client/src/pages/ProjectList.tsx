@@ -32,7 +32,7 @@ import { useRouter } from 'next/navigation';
 import { ProjectData } from '../types';
 
 // API configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_BASE_URL = process.env.NODE_ENV === 'production' ? '' : '';
 const API_ENDPOINTS = {
   PROJECTS: `${API_BASE_URL}/api/forms/projects`,
 };
