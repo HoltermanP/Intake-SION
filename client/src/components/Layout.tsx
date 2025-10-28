@@ -123,7 +123,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {menuItems.find(item => item.path === location.pathname)?.text || 'Intakeformulier'}
+            {menuItems.find(item => item.path === pathname)?.text || 'Intakeformulier'}
           </Typography>
           <IconButton
             size="large"
