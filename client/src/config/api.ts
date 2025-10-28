@@ -1,5 +1,5 @@
 // API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+const API_BASE_URL = process.env.NODE_ENV === 'production' ? '' : '';
 
 export const API_ENDPOINTS = {
   PROJECTS: `${API_BASE_URL}/api/forms/projects`,
