@@ -38,14 +38,14 @@ const Home: React.FC = () => {
       title: 'D2 Formulier',
       description: 'D2N checklist met automatische data overname',
       icon: <EngineeringIcon />,
-      path: '/d2',
+      path: '/projects',
       color: '#dc004e'
     },
     {
       title: 'Elektrisch Berekenen',
       description: 'Bereken elektrisch vermogen automatisch',
       icon: <CalculateIcon />,
-      path: '/electrical',
+      path: '/projects',
       color: '#2e7d32'
     },
     {

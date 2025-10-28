@@ -65,12 +65,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     handleProfileMenuClose();
   };
 
+  // Get project number from pathname if we're in a project context
+  const projectNumber = pathname.match(/\/projects\/([^\/]+)/)?.[1];
+  
   const menuItems = [
     { text: 'Home', icon: <HomeIcon />, path: '/' },
     { text: 'Projecten', icon: <ListIcon />, path: '/projects' },
     { text: 'Nieuw Project', icon: <AssignmentIcon />, path: '/projects/new' },
-    { text: 'D2 Formulier', icon: <EngineeringIcon />, path: '/d2' },
-    { text: 'Elektrisch Berekenen', icon: <CalculateIcon />, path: '/electrical' },
+    // Only show project-specific items when in a project context
+    ...(projectNumber ? [
+      { text: 'D2 Formulier', icon: <EngineeringIcon />, path: `/projects/${projectNumber}/d2` },
+      { text: 'Elektrisch Berekenen', icon: <CalculateIcon />, path: `/projects/${projectNumber}/electrical` },
+      { text: 'Algemene Voorwaarden', icon: <AssignmentIcon />, path: `/projects/${projectNumber}/terms` },
+      { text: 'Validatie', icon: <CalculateIcon />, path: `/projects/${projectNumber}/validation` },
+    ] : []),
   ];
 
   const drawer = (
