@@ -1,6 +1,5 @@
-# Vercel ignore file for monorepo
-server/node_modules/
-server/dist/
+# Vercel ignore file - alleen client directory gebruiken
+server/
 node_modules/
 .git/
 *.log
