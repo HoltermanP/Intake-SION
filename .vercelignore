@@ -1,6 +1,9 @@
-# Vercel ignore file - alleen client directory gebruiken
+# Vercel ignore - alleen client directory gebruiken
 server/
 node_modules/
 .git/
 *.log
 .DS_Store
+README.md
+DEPLOYMENT.md
+deploy.sh
