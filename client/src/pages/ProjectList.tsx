@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -27,7 +28,7 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { ProjectData } from '../types';
 
 // API configuration
@@ -41,7 +42,7 @@ const ProjectList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     fetchProjects();
@@ -104,7 +105,7 @@ const ProjectList: React.FC = () => {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => navigate('/projects/new')}
+          onClick={() => router.push('/projects/new')}
         >
           Nieuw Project
         </Button>
@@ -150,7 +151,7 @@ const ProjectList: React.FC = () => {
               <Button
                 variant="contained"
                 startIcon={<AddIcon />}
-                onClick={() => navigate('/projects/new')}
+                onClick={() => router.push('/projects/new')}
               >
                 Eerste Project Maken
               </Button>
@@ -203,14 +204,14 @@ const ProjectList: React.FC = () => {
                   <TableCell>
                     <IconButton
                       size="small"
-                      onClick={() => navigate(`/projects/${project.projectNumber}`)}
+                      onClick={() => router.push(`/projects/${project.projectNumber}`)}
                       title="Bekijken"
                     >
                       <VisibilityIcon />
                     </IconButton>
                     <IconButton
                       size="small"
-                      onClick={() => navigate(`/projects/${project.projectNumber}/edit`)}
+                      onClick={() => router.push(`/projects/${project.projectNumber}/edit`)}
                       title="Bewerken"
                     >
                       <EditIcon />

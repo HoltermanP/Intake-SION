@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Box,
@@ -12,10 +13,11 @@ import {
   Chip,
   Grid
 } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 
 const TermsAndConditions: React.FC = () => {
-  const { projectNumber } = useParams<{ projectNumber: string }>();
+  const params = useParams();
+  const projectNumber = params?.projectNumber as string;
 
   return (
     <Box>

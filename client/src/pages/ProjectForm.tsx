@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import {
   Box,
@@ -22,7 +23,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { ProjectData } from '../types';
 
 // API configuration
@@ -82,10 +83,10 @@ const ProjectForm: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
-  const { control, handleSubmit, formState: { errors }, watch } = useForm<ProjectData>({
-    resolver: yupResolver(schema),
+  const { control, handleSubmit, formState: { errors }, watch } = useForm({
+    resolver: yupResolver(schema) as any,
     defaultValues: {
       projectNumber: '',
       projectName: '',
@@ -134,7 +135,7 @@ const ProjectForm: React.FC = () => {
     }
   });
 
-  const onSubmit = async (data: ProjectData) => {
+  const onSubmit = async (data: any) => {
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -152,7 +153,7 @@ const ProjectForm: React.FC = () => {
       }
 
       const result = await response.json();
-      navigate(`/projects/${data.projectNumber}`);
+      router.push(`/projects/${data.projectNumber}`);
     } catch (error) {
       setSubmitError('Er is een fout opgetreden bij het opslaan van het project');
       console.error('Error saving project:', error);

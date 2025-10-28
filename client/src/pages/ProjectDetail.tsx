@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -23,7 +24,8 @@ import {
   CheckCircle as CheckCircleIcon,
   Gavel as GavelIcon
 } from '@mui/icons-material';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ProjectData, D2FormData, ElectricalCalculationData } from '../types';
 
 interface TabPanelProps {
@@ -49,8 +51,9 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const ProjectDetail: React.FC = () => {
-  const { projectNumber } = useParams<{ projectNumber: string }>();
-  const navigate = useNavigate();
+  const params = useParams();
+  const projectNumber = params?.projectNumber as string;
+  const router = useRouter();
   const [project, setProject] = useState<ProjectData | null>(null);
   const [d2Form, setD2Form] = useState<D2FormData | null>(null);
   const [electrical, setElectrical] = useState<ElectricalCalculationData | null>(null);
@@ -118,7 +121,7 @@ const ProjectDetail: React.FC = () => {
         <Alert severity="error" sx={{ mb: 3 }}>
           {error || 'Project niet gevonden'}
         </Alert>
-        <Button onClick={() => navigate('/projects')}>
+        <Button onClick={() => router.push('/projects')}>
           Terug naar Projecten
         </Button>
       </Box>
@@ -150,7 +153,7 @@ const ProjectDetail: React.FC = () => {
           <Button
             variant="outlined"
             startIcon={<EditIcon />}
-            onClick={() => navigate(`/projects/${projectNumber}/edit`)}
+            onClick={() => router.push(`/projects/${projectNumber}/edit`)}
           >
             Bewerken
           </Button>
@@ -334,7 +337,7 @@ const ProjectDetail: React.FC = () => {
               <Button
                 variant="contained"
                 startIcon={<EngineeringIcon />}
-                onClick={() => navigate(`/projects/${projectNumber}/d2`)}
+                onClick={() => router.push(`/projects/${projectNumber}/d2`)}
               >
                 D2 Formulier Invullen
               </Button>
@@ -359,7 +362,7 @@ const ProjectDetail: React.FC = () => {
               <Button
                 variant="contained"
                 startIcon={<CalculateIcon />}
-                onClick={() => navigate(`/projects/${projectNumber}/electrical`)}
+                onClick={() => router.push(`/projects/${projectNumber}/electrical`)}
               >
                 Elektrisch Berekenen
               </Button>
@@ -381,7 +384,7 @@ const ProjectDetail: React.FC = () => {
             <Button
               variant="contained"
               startIcon={<GavelIcon />}
-              onClick={() => navigate(`/projects/${projectNumber}/terms`)}
+              onClick={() => router.push(`/projects/${projectNumber}/terms`)}
             >
               Algemene Voorwaarden Bekijken
             </Button>
@@ -402,7 +405,7 @@ const ProjectDetail: React.FC = () => {
             <Button
               variant="contained"
               startIcon={<CheckCircleIcon />}
-              onClick={() => navigate(`/projects/${projectNumber}/validation`)}
+              onClick={() => router.push(`/projects/${projectNumber}/validation`)}
             >
               Project Valideren
             </Button>

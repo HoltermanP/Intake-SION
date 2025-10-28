@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -31,7 +32,8 @@ import {
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ElectricalCalculationData, ElectricalEntry } from '../types';
 
 const schema = yup.object({
@@ -87,14 +89,15 @@ const heatPumpTypes = [
 ];
 
 const ElectricalForm: React.FC = () => {
-  const { projectNumber } = useParams<{ projectNumber: string }>();
-  const navigate = useNavigate();
+  const params = useParams();
+  const projectNumber = params?.projectNumber as string;
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [projectData, setProjectData] = useState<any>(null);
 
-  const { control, handleSubmit, watch, formState: { errors } } = useForm<ElectricalCalculationData>({
-    resolver: yupResolver(schema),
+  const { control, handleSubmit, watch, formState: { errors } } = useForm({
+    resolver: yupResolver(schema) as any,
     defaultValues: {
       entries: [
         {
@@ -201,7 +204,7 @@ const ElectricalForm: React.FC = () => {
     };
   };
 
-  const onSubmit = async (data: ElectricalCalculationData) => {
+  const onSubmit = async (data: any) => {
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -231,7 +234,7 @@ const ElectricalForm: React.FC = () => {
       }
 
       const result = await response.json();
-      navigate(`/projects/${projectNumber}`);
+      router.push(`/projects/${projectNumber}`);
     } catch (error) {
       setSubmitError('Er is een fout opgetreden bij het opslaan van de elektrische berekening');
       console.error('Error saving electrical calculation:', error);
@@ -647,7 +650,7 @@ const ElectricalForm: React.FC = () => {
         <Box display="flex" gap={2} justifyContent="flex-end">
           <Button
             variant="outlined"
-            onClick={() => navigate(`/projects/${projectNumber}`)}
+            onClick={() => router.push(`/projects/${projectNumber}`)}
           >
             Annuleren
           </Button>

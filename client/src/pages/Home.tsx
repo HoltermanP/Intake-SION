@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Box,
@@ -20,10 +21,10 @@ import {
   CheckCircle as CheckCircleIcon,
   Info as InfoIcon
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const features = [
     {
@@ -110,7 +111,7 @@ const Home: React.FC = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  onClick={() => navigate(feature.path)}
+                  onClick={() => router.push(feature.path)}
                   sx={{ 
                     backgroundColor: feature.color,
                     '&:hover': {

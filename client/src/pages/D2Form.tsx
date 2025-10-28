@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -20,7 +21,8 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { D2FormData } from '../types';
 
 const schema = yup.object({
@@ -37,15 +39,16 @@ const schema = yup.object({
 });
 
 const D2Form: React.FC = () => {
-  const { projectNumber } = useParams<{ projectNumber: string }>();
-  const navigate = useNavigate();
+  const params = useParams();
+  const projectNumber = params?.projectNumber as string;
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [projectData, setProjectData] = useState<any>(null);
 
-  const { control, handleSubmit, formState: { errors }, setValue } = useForm<D2FormData>({
-    resolver: yupResolver(schema),
+  const { control, handleSubmit, formState: { errors }, setValue } = useForm({
+    resolver: yupResolver(schema) as any,
     defaultValues: {
       projectNumber: projectNumber || '',
       projectName: '',
@@ -127,7 +130,7 @@ const D2Form: React.FC = () => {
     }
   };
 
-  const onSubmit = async (data: D2FormData) => {
+  const onSubmit = async (data: any) => {
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -145,7 +148,7 @@ const D2Form: React.FC = () => {
       }
 
       const result = await response.json();
-      navigate(`/projects/${projectNumber}`);
+      router.push(`/projects/${projectNumber}`);
     } catch (error) {
       setSubmitError('Er is een fout opgetreden bij het opslaan van het D2 formulier');
       console.error('Error saving D2 form:', error);
@@ -294,9 +297,9 @@ const D2Form: React.FC = () => {
                           <FormControlLabel
                             control={
                               <Checkbox
-                                checked={field.value?.includes(utility) || false}
+                                checked={(field.value as string[])?.includes(utility) || false}
                                 onChange={(e) => {
-                                  const current = field.value || [];
+                                  const current = (field.value as string[]) || [];
                                   if (e.target.checked) {
                                     field.onChange([...current, utility]);
                                   } else {
@@ -584,7 +587,7 @@ const D2Form: React.FC = () => {
                 <Box display="flex" gap={2} justifyContent="flex-end">
                   <Button
                     variant="outlined"
-                    onClick={() => navigate(`/projects/${projectNumber}`)}
+                    onClick={() => router.push(`/projects/${projectNumber}`)}
                   >
                     Annuleren
                   </Button>

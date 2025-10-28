@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -23,7 +24,7 @@ import {
   Info as InfoIcon,
   Refresh as RefreshIcon
 } from '@mui/icons-material';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 
 interface ValidationResult {
   field: string;
@@ -40,7 +41,8 @@ interface ValidationSummary {
 }
 
 const Validation: React.FC = () => {
-  const { projectNumber } = useParams<{ projectNumber: string }>();
+  const params = useParams();
+  const projectNumber = params?.projectNumber as string;
   const [validationResults, setValidationResults] = useState<ValidationResult[]>([]);
   const [summary, setSummary] = useState<ValidationSummary>({ total: 0, valid: 0, warnings: 0, errors: 0 });
   const [isLoading, setIsLoading] = useState(true);
