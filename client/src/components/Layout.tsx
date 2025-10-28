@@ -30,6 +30,7 @@ import {
   AccountCircle as AccountCircleIcon,
   Logout as LogoutIcon
 } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
 import { useRouter, usePathname } from 'next/navigation';
 import { useMsal } from '@azure/msal-react';
 
@@ -65,20 +66,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     handleProfileMenuClose();
   };
 
-  // Get project number from pathname if we're in a project context
-  const projectNumber = pathname.match(/\/projects\/([^\/]+)/)?.[1];
-  
+  const handleNavigation = (path: string) => {
+    if (path === '/projects' && (pathname.includes('/d2') || pathname.includes('/electrical'))) {
+      // If we're on D2 or Electrical page, go to projects list
+      router.push('/projects');
+    } else {
+      router.push(path);
+    }
+  };
+
   const menuItems = [
-    { text: 'Home', icon: <HomeIcon />, path: '/' },
-    { text: 'Projecten', icon: <ListIcon />, path: '/projects' },
-    { text: 'Nieuw Project', icon: <AssignmentIcon />, path: '/projects/new' },
-    // Only show project-specific items when in a project context
-    ...(projectNumber ? [
-      { text: 'D2 Formulier', icon: <EngineeringIcon />, path: `/projects/${projectNumber}/d2` },
-      { text: 'Elektrisch Berekenen', icon: <CalculateIcon />, path: `/projects/${projectNumber}/electrical` },
-      { text: 'Algemene Voorwaarden', icon: <AssignmentIcon />, path: `/projects/${projectNumber}/terms` },
-      { text: 'Validatie', icon: <CalculateIcon />, path: `/projects/${projectNumber}/validation` },
-    ] : []),
+    { text: 'Home', icon: <HomeIcon />, path: '/', tooltip: 'Ga naar de startpagina' },
+    { text: 'Projecten', icon: <ListIcon />, path: '/projects', tooltip: 'Bekijk alle projecten' },
+    { text: 'Nieuw Project', icon: <AssignmentIcon />, path: '/projects/new', tooltip: 'Maak een nieuw project aan' },
+    { text: 'D2 Formulier', icon: <EngineeringIcon />, path: '/projects', tooltip: 'Ga naar projecten om een D2 formulier te openen' },
+    { text: 'Elektrisch Berekenen', icon: <CalculateIcon />, path: '/projects', tooltip: 'Ga naar projecten om elektrische berekeningen te openen' },
   ];
 
   const drawer = (
@@ -92,18 +94,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <List>
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
-            <ListItemButton
-              selected={pathname === item.path}
-              onClick={() => {
-                router.push(item.path);
-                if (isMobile) {
-                  setMobileOpen(false);
-                }
-              }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
+            <Tooltip title={item.tooltip} placement="right">
+              <ListItemButton
+                selected={pathname === item.path}
+                onClick={() => {
+                  handleNavigation(item.path);
+                  if (isMobile) {
+                    setMobileOpen(false);
+                  }
+                }}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>
+            </Tooltip>
           </ListItem>
         ))}
       </List>

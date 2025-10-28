@@ -26,6 +26,15 @@ import { useRouter } from 'next/navigation';
 const Home: React.FC = () => {
   const router = useRouter();
 
+  const handleFeatureClick = (path: string, title: string) => {
+    if (title === 'D2 Formulier' || title === 'Elektrisch Berekenen') {
+      // For D2 and Electrical, go to projects list with a message
+      router.push('/projects');
+    } else {
+      router.push(path);
+    }
+  };
+
   const features = [
     {
       title: 'Projectformulier',
@@ -111,7 +120,7 @@ const Home: React.FC = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  onClick={() => router.push(feature.path)}
+                  onClick={() => handleFeatureClick(feature.path, feature.title)}
                   sx={{ 
                     backgroundColor: feature.color,
                     '&:hover': {
