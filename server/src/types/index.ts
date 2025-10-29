@@ -39,7 +39,7 @@ export interface ProjectData {
   commercialSpacesArea: number;
   generalSpaces: number;
   generalSpacesArea: number;
-  contaminatedGround: 'Ja' | 'Nee, rapport opvragen';
+  contaminatedGround: 'Ja' | 'Nee' | 'Nee, rapport opvragen';
   fireHydrants: 'Ja' | 'Nee';
   
   // Water
@@ -97,30 +97,30 @@ export interface D2FormData {
   
   // Aandachtspunten
   otherPoints: string;
-  waterGasDistance: boolean;
-  waterSewerDistance: boolean;
-  highPressureGasDistance: boolean;
-  waterHeatDistance: boolean;
+  waterGasDistance?: boolean;
+  waterSewerDistance?: boolean;
+  highPressureGasDistance?: boolean;
+  waterHeatDistance?: boolean;
   
   // Planning
-  planStatus: string;
-  designReceived: boolean;
-  receivedDate: string;
-  softStartWeek: string;
-  hardStartWeek: string;
+  planStatus?: string;
+  designReceived?: boolean;
+  receivedDate?: string;
+  softStartWeek?: string;
+  hardStartWeek?: string;
   
   // Uitvoering
-  trackInspection: string;
-  digitalMarking: string;
-  storageLocation: string;
+  trackInspection?: string;
+  digitalMarking?: string;
+  storageLocation?: string;
   
   // V&G RI&E/KAM
-  risksDiscussed: 'Standaard risico\'s besproken' | 'Specifieke risico\'s besproken';
-  crow500: boolean;
-  riskExplanation: string;
+  risksDiscussed?: 'Standaard risico\'s besproken' | 'Specifieke risico\'s besproken';
+  crow500?: boolean;
+  riskExplanation?: string;
   
   // Overige opmerkingen
-  additionalComments: string;
+  additionalComments?: string;
 }
 
 export interface ElectricalCalculationData {
@@ -148,12 +148,13 @@ export interface ElectricalEntry {
   livingArea: number;
   heatPumpType: string;
   heatPumpPower: number;
-  totalHeatPumpPower: number;
+  totalHeatPumpPower?: number;
   privateChargingPower: number;
   totalPrivateChargingPower: number;
   publicChargingPower: number;
   totalPublicChargingPower: number;
-  comments: string;
+  comments?: string;
+  notes?: string;
 }
 
 export interface ValidationData {

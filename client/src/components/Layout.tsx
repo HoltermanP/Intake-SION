@@ -67,10 +67,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   const handleNavigation = (path: string) => {
-    if (path === '/projects' && (pathname.includes('/d2') || pathname.includes('/electrical'))) {
-      // If we're on D2 or Electrical page, go to projects list
-      router.push('/projects');
+    // Special handling for D2/Electrical so we deep-link to huidige project wanneer mogelijk
+    if (path === '/d2' || path === '/electrical') {
+      const match = pathname.match(/^\/projects\/([^/]+)/);
+      if (match && match[1]) {
+        const projectNumber = match[1];
+        router.push(`/projects/${projectNumber}${path}`);
+      } else {
+        // Geen huidig project in URL: stuur eerst naar projecten-overzicht
+        router.push('/projects');
+      }
     } else {
+      // Normale navigatie voor alle andere links
       router.push(path);
     }
   };
@@ -79,8 +87,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { text: 'Home', icon: <HomeIcon />, path: '/', tooltip: 'Ga naar de startpagina' },
     { text: 'Projecten', icon: <ListIcon />, path: '/projects', tooltip: 'Bekijk alle projecten' },
     { text: 'Nieuw Project', icon: <AssignmentIcon />, path: '/projects/new', tooltip: 'Maak een nieuw project aan' },
-    { text: 'D2 Formulier', icon: <EngineeringIcon />, path: '/projects', tooltip: 'Ga naar projecten om een D2 formulier te openen' },
-    { text: 'Elektrisch Berekenen', icon: <CalculateIcon />, path: '/projects', tooltip: 'Ga naar projecten om elektrische berekeningen te openen' },
+    { text: 'D2 Formulier', icon: <EngineeringIcon />, path: '/d2', tooltip: 'Open D2 formulier voor huidig project of kies een project' },
+    { text: 'Elektrisch Berekenen', icon: <CalculateIcon />, path: '/electrical', tooltip: 'Open Elektrisch Berekenen voor huidig project of kies een project' },
   ];
 
   const drawer = (
